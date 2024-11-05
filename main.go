@@ -63,15 +63,20 @@ func generateRandomDataFromTemplate(template Data, url string) {
 	}
 
 	fmt.Println(valueof)
-	timenano := time.Now().UTC().UnixNano()
-	randomizer := rand.New(rand.NewSource(uint64(timenano)))
-	for i := 1; i <= 100; i++ {
-		time.Sleep(1 * time.Second)
+	for i := 1; i <= 10000; i++ {
+		time.Sleep(5 * time.Second)
+
+		data := []ValidPayload{}
 		for i := 0; i < dataType.NumField(); i++ {
 			field := dataType.Field(i)
 			jsonTag := field.Tag.Get("json")
 
-			_, err := strconv.ParseFloat(valueof.Field(i).String(), 64)
+			vmenabled := field.Tag.Get("vmdata")
+			if vmenabled != "true" {
+				continue
+			}
+
+			value, err := strconv.ParseFloat(valueof.Field(i).String(), 64)
 			if err != nil {
 				fmt.Println(err.Error())
 				continue
@@ -80,7 +85,7 @@ func generateRandomDataFromTemplate(template Data, url string) {
 			metricName := fmt.Sprintf("odr_%s_%s", operation, jsonTag)
 			format := ValidPayload{
 				Metric: metricName,
-				Value:  float32(randomizer.Intn(100)),
+				Value:  value,
 				Tags: Tags{
 					MeterID:  meterId,
 					Status:   status,
@@ -89,30 +94,32 @@ func generateRandomDataFromTemplate(template Data, url string) {
 				},
 			}
 
-			payload, err := json.Marshal(format)
-			if err != nil {
-				fmt.Println("Error encoding JSON:", err)
-				return
-			}
-
-			req, err := http.NewRequest("POST", url, bytes.NewBuffer(payload))
-			if err != nil {
-				fmt.Println("Error creating request:", err)
-				return
-			}
-
-			req.Header.Set("Content-Type", "application/json")
-			client := &http.Client{}
-			resp, err := client.Do(req)
-			if err != nil {
-				fmt.Println("Error sending request:", err)
-				return
-			}
-			defer resp.Body.Close()
-
-			// Print response status
-			fmt.Println(metricName, "Response status:", resp.Status)
+			data = append(data, format)
 		}
+
+		payload, err := json.Marshal(data)
+		if err != nil {
+			fmt.Println("Error encoding JSON:", err)
+			return
+		}
+
+		req, err := http.NewRequest("POST", url, bytes.NewBuffer(payload))
+		if err != nil {
+			fmt.Println("Error creating request:", err)
+			return
+		}
+
+		req.Header.Set("Content-Type", "application/json")
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			fmt.Println("Error sending request:", err)
+			return
+		}
+		defer resp.Body.Close()
+
+		// Print response status
+		fmt.Println(data, "Response status:", resp.Status)
 	}
 }
 
@@ -142,7 +149,7 @@ func generateRandomSingleData(url string) {
 
 			format := ValidPayload{
 				Metric: "end_of_billing",
-				Value:  float32(randomizer.Intn(100)),
+				Value:  float64(randomizer.Intn(100)),
 				Tags: Tags{
 					MeterID: uuid.New().String(),
 					Status:  status,
@@ -220,7 +227,7 @@ func ReadSingleData() {
 
 type ValidPayload struct {
 	Metric string  `json:"metric"`
-	Value  float32 `json:"value"`
+	Value  float64 `json:"value"`
 	Tags   Tags    `json:"tags"`
 }
 
@@ -251,7 +258,7 @@ type MeterResponse struct {
 	ActivePowerImport string `json:"active_power_import"`
 	AlarmRegister     string `json:"alarm_register"`
 	Clock             string `json:"clock"`
-	CurrentL1         string `json:"current_l1"`
+	CurrentL1         string `json:"current_l1" vmdata:"true"`
 	CurrentL2         string `json:"current_l2"`
 	CurrentL3         string `json:"current_l3"`
 	InsertBy          string `json:"insert_by"`
@@ -261,7 +268,7 @@ type MeterResponse struct {
 	KwhExportL1       string `json:"kwh_export_l1"`
 	KwhExportL2       string `json:"kwh_export_l2"`
 	KwhExportL3       string `json:"kwh_export_l3"`
-	KwhExportTotal    string `json:"kwh_export_total"`
+	KwhExportTotal    string `json:"kwh_export_total" vmdata:"true"`
 	KwhImportL1       string `json:"kwh_import_l1"`
 	KwhImportL2       string `json:"kwh_import_l2"`
 	KwhImportL3       string `json:"kwh_import_l3"`
@@ -270,7 +277,7 @@ type MeterResponse struct {
 	PowerFactor       string `json:"power_factor"`
 	ServerTime        string `json:"server_time"`
 	Status            string `json:"status"`
-	VoltageL1         string `json:"voltage_l1"`
+	VoltageL1         string `json:"voltage_l1" vmdata:"true"`
 	VoltageL2         string `json:"voltage_l2"`
 	VoltageL3         string `json:"voltage_l3"`
 }
