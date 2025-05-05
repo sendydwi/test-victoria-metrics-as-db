@@ -1,0 +1,26 @@
+{
+  "comm_type": "PLC",
+  "dcu_id": "07530149",
+  "error_code": 200,
+  "error_message": "Success",
+  "meter_id": "111125018688",
+  "meter_operation_type": "Instaneous",
+  "meter_response": {
+    "insert_by": "SUNRISE",
+    "server_time": "2024-11-25T12:49:22.578Z",
+    "active_power_total": "0",
+    "apparent_power_total": "0",
+    "comm_type": "PLC",
+    "current_l1": "0",
+    "frequency": "0",
+    "kvarh_export_total": "0",
+    "kvarh_import_total": "148",
+    "kwh_export_total": "367",
+    "kwh_import_total": "0",
+    "lqi_plc": "0",
+    "lqi_rf": "0"
+  },
+  "read_date": "2024-11-25T12:00:00.000Z",
+  "request_date": "2024-11-25T12:00:00.000Z",
+  "trx_id": "3bdbf7b67b2a1c759c0cca161aaa63d6"
+}

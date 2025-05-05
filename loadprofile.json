@@ -1,7 +1,7 @@
 {
   "comm_type": "PLC",
   "dcu_id": "05290230010015",
-  "error_code": "200",
+  "error_code": 200,
   "error_message": "Success",
   "hes_id": "sgpi",
   "meter_id": "24619000063",
@@ -14,7 +14,7 @@
     "current_l1": "24.0",
     "current_l2": "",
     "current_l3": "",
-    "insert_by": "WASIONHES",
+    "insert_by": "SUNRISE",
     "kvarh_billing": "0.0",
     "kvarh_export_total": "0.0",
     "kvarh_import_total": "0.0",
