@@ -185,7 +185,7 @@ func main() {
 		"215220011679",
 	}
 
-	url := "http://165.22.242.191:4242/api/put"
+	url := "http://127.0.0.1:4242/api/put"
 
 	exampleData := getTemplateExamplePayload("loadprofile.json")
 	exampleDataInstant := getTemplateExamplePayloadInstant("instant.json")
