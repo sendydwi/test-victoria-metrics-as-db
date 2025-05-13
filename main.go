@@ -20,201 +20,202 @@ func main() {
 		"215220049582",
 		"215220049558",
 		"215220049497",
-		"215220049495",
-		"215220049491",
-		"215220049244",
-		"215220048709",
-		"215220017925",
-		"215220014822",
-		"215220014723",
-		"215220014710",
-		"215220018443",
-		"215220018409",
-		"215220017902",
-		"215220017901",
-		"215220017900",
-		"215220017899",
-		"215220017898",
-		"215220017897",
-		"215220017848",
-		"215220017847",
-		"215220013399",
-		"215220013400",
-		"215220013398",
-		"215220013384",
-		"215220013383",
-		"215220013381",
-		"215220013379",
-		"215220011640",
-		"215220011639",
-		"215220013179",
-		"215220013178",
-		"215220013177",
-		"215220012029",
-		"215220011782",
-		"215220011779",
-		"215220011770",
-		"215220011769",
-		"215220011767",
-		"215220011731",
-		"215220011709",
-		"215220011708",
-		"215220011707",
-		"215220011706",
-		"215220049833",
-		"215220049132",
-		"215220048990",
-		"215220048927",
-		"215220025213",
-		"215220011670",
-		"215220011669",
-		"215220011662",
-		"215220011661",
-		"215220011660",
-		"215220011659",
-		"215220011658",
-		"215220011657",
-		"215220011644",
-		"215220011643",
-		"215221001485",
-		"215221001483",
-		"215220048688",
-		"215220048584",
-		"215220034774",
-		"215220027020",
-		"215220016185",
-		"215220014519",
-		"215220013583",
-		"215220012737",
-		"215220012736",
-		"215220012733",
-		"215220012732",
-		"215220012191",
-		"215220011514",
-		"215220010713",
-		"215220010710",
-		"215220010709",
-		"215220047797",
-		"215220022035",
-		"215220016679",
-		"215220013352",
-		"215220012441",
-		"215220012351",
-		"215220012349",
-		"215220010275",
-		"215220010266",
-		"215220019497",
-		"215220019222",
-		"215220019218",
-		"215220019207",
-		"215220019205",
-		"215220018766",
-		"215220018764",
-		"215220018501",
-		"215220018498",
-		"215220017843",
-		"215220017737",
-		"215220017506",
-		"215220017505",
-		"215220016300",
-		"215220016299",
-		"215220016298",
-		"215220016297",
-		"215220016296",
-		"215220016295",
-		"215220016262",
-		"215220016259",
-		"215220015835",
-		"215220014276",
-		"215220014256",
-		"215220013401",
-		"215220013361",
-		"215220013340",
-		"215220013309",
-		"215220013308",
-		"215220013307",
-		"215220013276",
-		"215220013275",
-		"215220013274",
-		"215220013270",
-		"215220013268",
-		"215220013266",
-		"215220013265",
-		"215220013258",
-		"215220013257",
-		"215220013256",
-		"215220013255",
-		"215220013254",
-		"215220013253",
-		"215220013196",
-		"215220013182",
-		"215220013181",
-		"215220013180",
-		"215220013176",
-		"215220013175",
-		"215220013156",
-		"215220013155",
-		"215220013154",
-		"215220013153",
-		"215220013152",
-		"215220012988",
-		"215220012986",
-		"215220012984",
-		"215220012868",
-		"215220012514",
-		"215220012510",
-		"215220012366",
-		"215220012358",
-		"215220012357",
-		"215220012356",
-		"215220012355",
-		"215220012354",
-		"215220012353",
-		"215220012089",
-		"215220012034",
-		"215220012032",
-		"215220012031",
-		"215220012030",
-		"215220011705",
-		"215220011686",
-		"215220011685",
-		"215220011684",
-		"215220011683",
-		"215220011682",
-		"215220011681",
-		"215220011679",
+		// "215220049495",
+		// "215220049491",
+		// "215220049244",
+		// "215220048709",
+		// "215220017925",
+		// "215220014822",
+		// "215220014723",
+		// "215220014710",
+		// "215220018443",
+		// "215220018409",
+		// "215220017902",
+		// "215220017901",
+		// "215220017900",
+		// "215220017899",
+		// "215220017898",
+		// "215220017897",
+		// "215220017848",
+		// "215220017847",
+		// "215220013399",
+		// "215220013400",
+		// "215220013398",
+		// "215220013384",
+		// "215220013383",
+		// "215220013381",
+		// "215220013379",
+		// "215220011640",
+		// "215220011639",
+		// "215220013179",
+		// "215220013178",
+		// "215220013177",
+		// "215220012029",
+		// "215220011782",
+		// "215220011779",
+		// "215220011770",
+		// "215220011769",
+		// "215220011767",
+		// "215220011731",
+		// "215220011709",
+		// "215220011708",
+		// "215220011707",
+		// "215220011706",
+		// "215220049833",
+		// "215220049132",
+		// "215220048990",
+		// "215220048927",
+		// "215220025213",
+		// "215220011670",
+		// "215220011669",
+		// "215220011662",
+		// "215220011661",
+		// "215220011660",
+		// "215220011659",
+		// "215220011658",
+		// "215220011657",
+		// "215220011644",
+		// "215220011643",
+		// "215221001485",
+		// "215221001483",
+		// "215220048688",
+		// "215220048584",
+		// "215220034774",
+		// "215220027020",
+		// "215220016185",
+		// "215220014519",
+		// "215220013583",
+		// "215220012737",
+		// "215220012736",
+		// "215220012733",
+		// "215220012732",
+		// "215220012191",
+		// "215220011514",
+		// "215220010713",
+		// "215220010710",
+		// "215220010709",
+		// "215220047797",
+		// "215220022035",
+		// "215220016679",
+		// "215220013352",
+		// "215220012441",
+		// "215220012351",
+		// "215220012349",
+		// "215220010275",
+		// "215220010266",
+		// "215220019497",
+		// "215220019222",
+		// "215220019218",
+		// "215220019207",
+		// "215220019205",
+		// "215220018766",
+		// "215220018764",
+		// "215220018501",
+		// "215220018498",
+		// "215220017843",
+		// "215220017737",
+		// "215220017506",
+		// "215220017505",
+		// "215220016300",
+		// "215220016299",
+		// "215220016298",
+		// "215220016297",
+		// "215220016296",
+		// "215220016295",
+		// "215220016262",
+		// "215220016259",
+		// "215220015835",
+		// "215220014276",
+		// "215220014256",
+		// "215220013401",
+		// "215220013361",
+		// "215220013340",
+		// "215220013309",
+		// "215220013308",
+		// "215220013307",
+		// "215220013276",
+		// "215220013275",
+		// "215220013274",
+		// "215220013270",
+		// "215220013268",
+		// "215220013266",
+		// "215220013265",
+		// "215220013258",
+		// "215220013257",
+		// "215220013256",
+		// "215220013255",
+		// "215220013254",
+		// "215220013253",
+		// "215220013196",
+		// "215220013182",
+		// "215220013181",
+		// "215220013180",
+		// "215220013176",
+		// "215220013175",
+		// "215220013156",
+		// "215220013155",
+		// "215220013154",
+		// "215220013153",
+		// "215220013152",
+		// "215220012988",
+		// "215220012986",
+		// "215220012984",
+		// "215220012868",
+		// "215220012514",
+		// "215220012510",
+		// "215220012366",
+		// "215220012358",
+		// "215220012357",
+		// "215220012356",
+		// "215220012355",
+		// "215220012354",
+		// "215220012353",
+		// "215220012089",
+		// "215220012034",
+		// "215220012032",
+		// "215220012031",
+		// "215220012030",
+		// "215220011705",
+		// "215220011686",
+		// "215220011685",
+		// "215220011684",
+		// "215220011683",
+		// "215220011682",
+		// "215220011681",
+		// "215220011679",
 	}
 
-	url := "http://<url>:4242/api/put"
+	url := "http://165.22.242.191:4242/api/put"
 	exampleData := getTemplateExamplePayload("loadprofile.json")
 	exampleDataInstant := getTemplateExamplePayloadInstant("instant.json")
 	exampleDataEob := getTemplateExamplePayloadEoB("eob.json")
 	for _, v := range meter {
 		unit := "51143"
 		insert := "SNR"
+		brandId := "Sunrise"
 		projectId := "PROJECT-1"
-		loadProfileDummyData(*exampleData, url, v, unit, insert, projectId)
-		loadInstantDummyData(*exampleDataInstant, url, v, unit, insert, projectId)
-		loadEobDummyData(*exampleDataEob, url, v, unit, insert, projectId)
+		loadProfileDummyData(*exampleData, url, v, unit, insert, projectId, brandId)
+		loadInstantDummyData(*exampleDataInstant, url, v, unit, insert, projectId, brandId)
+		loadEobDummyData(*exampleDataEob, url, v, unit, insert, projectId, brandId)
 	}
 
 	// meter List wasion
 	meterWasion := []string{
 		"311126000347",
 		"111125039014",
-		"111125039010",
-		"311126000193",
-		"111125033632",
-		"111125033637",
-		"111125039420",
-		"311126000171",
-		"111125034009",
-		"111125036647",
-		"111125036683",
-		"111125033640",
-		"111125037831",
-		"111125036694",
-		"111125036690",
+		// "111125039010",
+		// "311126000193",
+		// "111125033632",
+		// "111125033637",
+		// "111125039420",
+		// "311126000171",
+		// "111125034009",
+		// "111125036647",
+		// "111125036683",
+		// "111125033640",
+		// "111125037831",
+		// "111125036694",
+		// "111125036690",
 	}
 
 	exampleDataWasion := getTemplateExamplePayload("loadprofile.json")
@@ -223,23 +224,23 @@ func main() {
 	for _, v := range meterWasion {
 		unit := "53559"
 		insert := "WSN"
+		brandId := "Wasion"
 		projectId := "PROJECT-1"
-		loadProfileDummyData(*exampleDataWasion, url, v, unit, insert, projectId)
-		loadInstantDummyData(*exampleDataInstantWasion, url, v, unit, insert, projectId)
-		loadEobDummyData(*exampleDataEobWasion, url, v, unit, insert, projectId)
+		loadProfileDummyData(*exampleDataWasion, url, v, unit, insert, projectId, brandId)
+		loadInstantDummyData(*exampleDataInstantWasion, url, v, unit, insert, projectId, brandId)
+		loadEobDummyData(*exampleDataEobWasion, url, v, unit, insert, projectId, brandId)
 	}
 }
 
-func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insertBy, projectID string) {
-	baseDate := time.Date(2025, 1, 1, 0, 0, 0, 0, time.Now().Location())
+func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insertBy, projectID, brandID string) {
+	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().Location())
 
-	fmt.Printf("%+v", template)
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	for d := 1; d <= 1; d += 3 {
+	for d := 0; d < 42; d += 3 {
 		data := []ValidPayload{}
-		for x := 0; x <= 0; x++ {
+		for x := 0; x <= 2; x++ {
 			day := baseDate.Add(time.Duration(d+x) * 24 * time.Hour)
 			nod := 96
 			increment := 1440 / nod
@@ -271,7 +272,7 @@ func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insert
 						continue
 					}
 
-					metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
+					metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
 					format := ValidPayload{
 						Metric:    metricName,
 						Timestamp: dataDate.UnixMilli(),
@@ -279,17 +280,18 @@ func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insert
 						Tags: Tags{
 							MeterID:   meterId,
 							Status:    status,
-							InsertBy:  insertBy,
+							HesID:     insertBy,
 							UnitId:    unitId,
 							TrxID:     trxId,
 							ProjectID: projectID,
+							BrandID:   brandID,
 						},
 					}
 
 					data = append(data, format)
 				}
 
-				metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
+				metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
 				format := ValidPayload{
 					Metric:    metricName,
 					Timestamp: dataDate.UnixMilli(),
@@ -297,10 +299,11 @@ func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insert
 					Tags: Tags{
 						MeterID:   meterId,
 						Status:    status,
-						InsertBy:  insertBy,
+						HesID:     insertBy,
 						UnitId:    unitId,
 						TrxID:     trxId,
 						ProjectID: projectID,
+						BrandID:   brandID,
 					},
 				}
 
@@ -345,15 +348,13 @@ func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insert
 	}
 }
 
-func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, projectID string) {
-	baseDate := time.Date(2025, 1, 1, 0, 0, 0, 0, time.Now().Location())
-
-	fmt.Printf("%+v", template)
+func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, projectID, brandID string) {
+	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().Location())
 
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	for d := 1; d <= 1; d++ {
+	for d := 0; d < 42; d++ {
 		day := baseDate.Add(time.Duration(d) * 24 * time.Hour)
 		nod := 2
 		increment := (24 * 60) / nod
@@ -386,7 +387,7 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, 
 					continue
 				}
 
-				metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
+				metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
 				format := ValidPayload{
 					Metric:    metricName,
 					Timestamp: dataDate.UnixMilli(),
@@ -394,17 +395,18 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, 
 					Tags: Tags{
 						MeterID:   meterId,
 						Status:    status,
-						InsertBy:  insertBy,
+						HesID:     insertBy,
 						UnitId:    unitId,
 						TrxID:     trxId,
 						ProjectID: projectID,
+						BrandID:   brandID,
 					},
 				}
 
 				data = append(data, format)
 			}
 
-			metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
+			metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
 			format := ValidPayload{
 				Metric:    metricName,
 				Timestamp: dataDate.UnixMilli(),
@@ -412,10 +414,11 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, 
 				Tags: Tags{
 					MeterID:   meterId,
 					Status:    status,
-					InsertBy:  insertBy,
+					HesID:     insertBy,
 					UnitId:    unitId,
 					TrxID:     trxId,
 					ProjectID: projectID,
+					BrandID:   brandID,
 				},
 			}
 
@@ -458,13 +461,11 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, 
 	}
 }
 
-func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy, projectID string) {
+func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy, projectID, brandID string) {
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	fmt.Printf("%+v", template)
-
-	for d := 1; d <= 1; d++ {
+	for d := 4; d <= 5; d++ {
 		day := time.Date(2025, time.Month(d), 1, 0, 0, 0, 0, time.Now().Location())
 
 		data := []ValidPayload{}
@@ -493,7 +494,7 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy,
 				continue
 			}
 
-			metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
+			metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
 			format := ValidPayload{
 				Metric:    metricName,
 				Timestamp: day.UnixMilli(),
@@ -501,17 +502,18 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy,
 				Tags: Tags{
 					MeterID:   meterId,
 					Status:    status,
-					InsertBy:  insertBy,
+					HesID:     insertBy,
 					UnitId:    unitId,
 					TrxID:     trxId,
 					ProjectID: projectID,
+					BrandID:   brandID,
 				},
 			}
 
 			data = append(data, format)
 		}
 
-		metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
+		metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
 		format := ValidPayload{
 			Metric:    metricName,
 			Timestamp: day.UnixMilli(),
@@ -519,10 +521,11 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy,
 			Tags: Tags{
 				MeterID:   meterId,
 				Status:    status,
-				InsertBy:  insertBy,
+				HesID:     insertBy,
 				UnitId:    unitId,
 				TrxID:     trxId,
 				ProjectID: projectID,
+				BrandID:   brandID,
 			},
 		}
 
@@ -634,10 +637,11 @@ type ValidPayload struct {
 type Tags struct {
 	MeterID   string `json:"meter_id"`
 	Status    string `json:"status"`
-	InsertBy  string `json:"insert_by"`
+	HesID     string `json:"hes_id"`
+	BrandID   string `json:"brand_id"`
 	UnitId    string `json:"unit_id"`
 	TrxID     string `json:"trx_id"`
-	ProjectID string `json:project_id`
+	ProjectID string `json:"project_id"`
 }
 
 type Response struct {
