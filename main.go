@@ -185,17 +185,17 @@ func main() {
 		"215220011679",
 	}
 
-	url := "http://127.0.0.1:4242/api/put"
-
+	url := "http://<url>:4242/api/put"
 	exampleData := getTemplateExamplePayload("loadprofile.json")
 	exampleDataInstant := getTemplateExamplePayloadInstant("instant.json")
 	exampleDataEob := getTemplateExamplePayloadEoB("eob.json")
 	for _, v := range meter {
 		unit := "51143"
-		insert := "SUNRISE"
-		loadProfileDummyData(*exampleData, url, v, unit, insert)
-		loadInstantDummyData(*exampleDataInstant, url, v, unit, insert)
-		loadEobDummyData(*exampleDataEob, url, v, unit, insert)
+		insert := "SNR"
+		projectId := "PROJECT-1"
+		loadProfileDummyData(*exampleData, url, v, unit, insert, projectId)
+		loadInstantDummyData(*exampleDataInstant, url, v, unit, insert, projectId)
+		loadEobDummyData(*exampleDataEob, url, v, unit, insert, projectId)
 	}
 
 	// meter List wasion
@@ -222,22 +222,24 @@ func main() {
 	exampleDataEobWasion := getTemplateExamplePayloadEoB("eob.json")
 	for _, v := range meterWasion {
 		unit := "53559"
-		insert := "WASIONHES"
-		loadProfileDummyData(*exampleDataWasion, url, v, unit, insert)
-		loadInstantDummyData(*exampleDataInstantWasion, url, v, unit, insert)
-		loadEobDummyData(*exampleDataEobWasion, url, v, unit, insert)
+		insert := "WSN"
+		projectId := "PROJECT-1"
+		loadProfileDummyData(*exampleDataWasion, url, v, unit, insert, projectId)
+		loadInstantDummyData(*exampleDataInstantWasion, url, v, unit, insert, projectId)
+		loadEobDummyData(*exampleDataEobWasion, url, v, unit, insert, projectId)
 	}
 }
 
-func loadProfileDummyData(template Data, url, meterId, unitId, insertBy string) {
-	baseDate := time.Date(2025, 2, 1, 0, 0, 0, 0, time.Local)
+func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insertBy, projectID string) {
+	baseDate := time.Date(2025, 1, 1, 0, 0, 0, 0, time.Now().Location())
 
+	fmt.Printf("%+v", template)
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	for d := 1; d <= 90; d += 3 {
+	for d := 1; d <= 1; d += 3 {
 		data := []ValidPayload{}
-		for x := 0; x <= 2; x++ {
+		for x := 0; x <= 0; x++ {
 			day := baseDate.Add(time.Duration(d+x) * 24 * time.Hour)
 			nod := 96
 			increment := 1440 / nod
@@ -269,34 +271,36 @@ func loadProfileDummyData(template Data, url, meterId, unitId, insertBy string) 
 						continue
 					}
 
-					metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
+					metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
 					format := ValidPayload{
 						Metric:    metricName,
 						Timestamp: dataDate.UnixMilli(),
 						Value:     value * randomizeWithin50Percent(64),
 						Tags: Tags{
-							MeterID:  meterId,
-							Status:   status,
-							InsertBy: insertBy,
-							UnitId:   unitId,
-							TrxID:    trxId,
+							MeterID:   meterId,
+							Status:    status,
+							InsertBy:  insertBy,
+							UnitId:    unitId,
+							TrxID:     trxId,
+							ProjectID: projectID,
 						},
 					}
 
 					data = append(data, format)
 				}
 
-				metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
+				metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
 				format := ValidPayload{
 					Metric:    metricName,
 					Timestamp: dataDate.UnixMilli(),
 					Value:     1,
 					Tags: Tags{
-						MeterID:  meterId,
-						Status:   status,
-						InsertBy: insertBy,
-						UnitId:   unitId,
-						TrxID:    trxId,
+						MeterID:   meterId,
+						Status:    status,
+						InsertBy:  insertBy,
+						UnitId:    unitId,
+						TrxID:     trxId,
+						ProjectID: projectID,
 					},
 				}
 
@@ -341,13 +345,15 @@ func loadProfileDummyData(template Data, url, meterId, unitId, insertBy string) 
 	}
 }
 
-func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy string) {
-	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Local)
+func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, projectID string) {
+	baseDate := time.Date(2025, 1, 1, 0, 0, 0, 0, time.Now().Location())
+
+	fmt.Printf("%+v", template)
 
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	for d := 1; d <= 30; d++ {
+	for d := 1; d <= 1; d++ {
 		day := baseDate.Add(time.Duration(d) * 24 * time.Hour)
 		nod := 2
 		increment := (24 * 60) / nod
@@ -380,34 +386,36 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy s
 					continue
 				}
 
-				metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
+				metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
 				format := ValidPayload{
 					Metric:    metricName,
 					Timestamp: dataDate.UnixMilli(),
 					Value:     value * randomizeWithin50Percent(64),
 					Tags: Tags{
-						MeterID:  meterId,
-						Status:   status,
-						InsertBy: insertBy,
-						UnitId:   unitId,
-						TrxID:    trxId,
+						MeterID:   meterId,
+						Status:    status,
+						InsertBy:  insertBy,
+						UnitId:    unitId,
+						TrxID:     trxId,
+						ProjectID: projectID,
 					},
 				}
 
 				data = append(data, format)
 			}
 
-			metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
+			metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
 			format := ValidPayload{
 				Metric:    metricName,
 				Timestamp: dataDate.UnixMilli(),
 				Value:     1,
 				Tags: Tags{
-					MeterID:  meterId,
-					Status:   status,
-					InsertBy: insertBy,
-					UnitId:   unitId,
-					TrxID:    trxId,
+					MeterID:   meterId,
+					Status:    status,
+					InsertBy:  insertBy,
+					UnitId:    unitId,
+					TrxID:     trxId,
+					ProjectID: projectID,
 				},
 			}
 
@@ -427,8 +435,7 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy s
 			if err != nil {
 				fmt.Println("Error creating request:", err)
 				time.Sleep(1 * time.Second)
-			}
-			if err == nil {
+			} else {
 				continue
 			}
 		}
@@ -451,12 +458,14 @@ func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy s
 	}
 }
 
-func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy string) {
+func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy, projectID string) {
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
 
-	for d := 4; d <= 5; d++ {
-		day := time.Date(2025, time.Month(d), 5, 0, 0, 0, 0, time.Local)
+	fmt.Printf("%+v", template)
+
+	for d := 1; d <= 1; d++ {
+		day := time.Date(2025, time.Month(d), 1, 0, 0, 0, 0, time.Now().Location())
 
 		data := []ValidPayload{}
 		trxId := fmt.Sprintf("%s-%d", template.TrxID, day.UnixMilli())
@@ -484,34 +493,36 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy 
 				continue
 			}
 
-			metricName := fmt.Sprintf("dummy_1_periodic_%s_%s", operation, jsonTag)
+			metricName := fmt.Sprintf("dummy_2-1_periodic_%s_%s", operation, jsonTag)
 			format := ValidPayload{
 				Metric:    metricName,
 				Timestamp: day.UnixMilli(),
 				Value:     value * randomizeWithin50Percent(64),
 				Tags: Tags{
-					MeterID:  meterId,
-					Status:   status,
-					InsertBy: insertBy,
-					UnitId:   unitId,
-					TrxID:    trxId,
+					MeterID:   meterId,
+					Status:    status,
+					InsertBy:  insertBy,
+					UnitId:    unitId,
+					TrxID:     trxId,
+					ProjectID: projectID,
 				},
 			}
 
 			data = append(data, format)
 		}
 
-		metricName := fmt.Sprintf("dummy_1_periodic_%s_success", operation)
+		metricName := fmt.Sprintf("dummy_2-1_periodic_%s_success", operation)
 		format := ValidPayload{
 			Metric:    metricName,
 			Timestamp: day.UnixMilli(),
 			Value:     1,
 			Tags: Tags{
-				MeterID:  meterId,
-				Status:   status,
-				InsertBy: insertBy,
-				UnitId:   unitId,
-				TrxID:    trxId,
+				MeterID:   meterId,
+				Status:    status,
+				InsertBy:  insertBy,
+				UnitId:    unitId,
+				TrxID:     trxId,
+				ProjectID: projectID,
 			},
 		}
 
@@ -528,10 +539,9 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy 
 		for r := 0; r < 5; r++ {
 			req, err = http.NewRequest("POST", url, bytes.NewBuffer(payload))
 			if err != nil {
-				fmt.Println("Error creating request:", err)
+				fmt.Println("Error creating request:", err.Error())
 				time.Sleep(1 * time.Second)
-			}
-			if err == nil {
+			} else {
 				continue
 			}
 		}
@@ -560,14 +570,14 @@ func randomizeWithin50Percent(base float64) float64 {
 	return base * factor
 }
 
-func getTemplateExamplePayload(fileName string) *Data {
+func getTemplateExamplePayload(fileName string) *DataLoadProfile {
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		fmt.Printf("Error reading file: %v", err)
 		return nil
 	}
 
-	var examplePayload Data
+	var examplePayload DataLoadProfile
 
 	err = json.Unmarshal(data, &examplePayload)
 	if err != nil {
@@ -622,11 +632,12 @@ type ValidPayload struct {
 }
 
 type Tags struct {
-	MeterID  string `json:"meter_id"`
-	Status   string `json:"status"`
-	InsertBy string `json:"insert_by"`
-	UnitId   string `json:"unit_id"`
-	TrxID    string `json:"trx_id"`
+	MeterID   string `json:"meter_id"`
+	Status    string `json:"status"`
+	InsertBy  string `json:"insert_by"`
+	UnitId    string `json:"unit_id"`
+	TrxID     string `json:"trx_id"`
+	ProjectID string `json:project_id`
 }
 
 type Response struct {
@@ -644,47 +655,46 @@ type MetrixResultVictoria struct {
 	Values [][]any     `json:"values"`
 }
 
-type MeterResponse struct {
-	ActivePowerExport string `json:"active_power_export" vmdata:"true"`
-	ActivePowerImport string `json:"active_power_import" vmdata:"true"`
-	AlarmRegister     string `json:"alarm_register`
-	Clock             string `json:"clock`
-	CurrentL1         string `json:"current_l1" vmdata:"true"`
-	CurrentL2         string `json:"current_l2" vmdata:"true"`
-	CurrentL3         string `json:"current_l3" vmdata:"true"`
-	InsertBy          string `json:"insert_by`
-	KvarhBilling      string `json:"kvarh_billing" vmdata:"true"`
-	KvarhExportTotal  string `json:"kvarh_export_total" vmdata:"true"`
-	KvarhImportTotal  string `json:"kvarh_import_total" vmdata:"true"`
-	KwhExportL1       string `json:"kwh_export_l1" vmdata:"true"`
-	KwhExportL2       string `json:"kwh_export_l2" vmdata:"true"`
-	KwhExportL3       string `json:"kwh_export_l3" vmdata:"true"`
-	KwhExportTotal    string `json:"kwh_export_total" vmdata:"true"`
-	KwhImportL1       string `json:"kwh_import_l1" vmdata:"true"`
-	KwhImportL2       string `json:"kwh_import_l2" vmdata:"true"`
-	KwhImportL3       string `json:"kwh_import_l3" vmdata:"true"`
-	KwhImportTotal    string `json:"kwh_import_total" vmdata:"true"`
-	MeterID           string `json:"meter_id"`
-	PowerFactor       string `json:"power_factor"`
-	ServerTime        string `json:"server_time"`
-	Status            string `json:"status"`
-	VoltageL1         string `json:"voltage_l1" vmdata:"true"`
-	VoltageL2         string `json:"voltage_l2" vmdata:"true"`
-	VoltageL3         string `json:"voltage_l3" vmdata:"true"`
+type LoadProfile struct {
+	MeterId                string    `json:"meter_id"`
+	Clock                  time.Time `json:"clock"` // Use time.Time if it's an ISO date
+	Status                 string    `json:"status"`
+	AlarmRegister          string    `json:"alarm_register"`
+	VoltageL1              string    `json:"voltage_l1" vmdata:"true"`
+	VoltageL2              string    `json:"voltage_l2" vmdata:"true"`
+	VoltageL3              string    `json:"voltage_l3" vmdata:"true"`
+	CurrentL1              string    `json:"current_l1" vmdata:"true"`
+	CurrentL2              string    `json:"current_l2" vmdata:"true"`
+	CurrentL3              string    `json:"current_l3" vmdata:"true"`
+	WhExportL1             string    `json:"wh_export_l1" vmdata:"true"`
+	WhExportL2             string    `json:"wh_export_l2" vmdata:"true"`
+	WhExportL3             string    `json:"wh_export_l3" vmdata:"true"`
+	WhExportTotal          string    `json:"wh_export_total" vmdata:"true"`
+	WhImportL1             string    `json:"wh_import_l1" vmdata:"true"`
+	WhImportL2             string    `json:"wh_import_l2" vmdata:"true"`
+	WhImportL3             string    `json:"wh_import_l3" vmdata:"true"`
+	WhImportTotal          string    `json:"wh_import_total" vmdata:"true"`
+	ActivePowerExportTotal string    `json:"active_power_export_total" vmdata:"true"`
+	ActivePowerImportTotal string    `json:"active_power_import_total" vmdata:"true"`
+	VarhExportTotal        string    `json:"varh_export_total" vmdata:"true"`
+	VarhImportTotal        string    `json:"varh_import_total" vmdata:"true"`
+	VarhTotal              string    `json:"varh_total" vmdata:"true"`
+	PowerFactor            string    `json:"power_factor" vmdata:"true"`
 }
 
-type Data struct {
-	CommType           string        `json:"comm_type"`
-	DcuID              string        `json:"dcu_id"`
-	ErrorCode          int32         `json:"error_code"`
-	ErrorMessage       string        `json:"error_message"`
-	HesID              string        `json:"hes_id"`
-	MeterID            string        `json:"meter_id"`
-	MeterOperationType string        `json:"meter_operation_type"`
-	MeterResponse      MeterResponse `json:"meter_response"`
-	ReadDate           string        `json:"read_date"`
-	RequestDate        string        `json:"request_date"`
-	TrxID              string        `json:"trx_id"`
+type DataLoadProfile struct {
+	CommType           string      `json:"comm_type"`
+	DcuID              string      `json:"dcu_id"`
+	ErrorCode          int32       `json:"error_code"`
+	ErrorMessage       string      `json:"error_message"`
+	HesID              string      `json:"hes_id"`
+	MeterID            string      `json:"meter_id"`
+	MeterOperationType string      `json:"meter_operation_type"`
+	MeterResponse      LoadProfile `json:"meter_response"`
+	ReadDate           string      `json:"read_date"`
+	RequestDate        string      `json:"request_date"`
+	TrxID              string      `json:"trx_id"`
+	ProjectId          string      `json:"project_id"`
 }
 
 type DataInstant struct {
@@ -713,62 +723,138 @@ type DataEndOfBilling struct {
 	ReadDate           string       `json:"read_date"`
 	RequestDate        string       `json:"request_date"`
 	TrxID              string       `json:"trx_id"`
+	ProjectId          string       `json:"project_id"`
 }
 
 type Instant struct {
-	InsertBy         string `json:"insert_by"`
-	ServerTime       string `json:"server_time"`
-	ActivePowerTotal string `json:"active_power_total" vmdata:"true"`
-	CommType         string `json:"comm_type"`
-	CurrentL1        string `json:"current_l1" vmdata:"true"`
-	KvarhExportTotal string `json:"kvarh_export_total" vmdata:"true"`
-	KvarhImportTotal string `json:"kvarh_import_total" vmdata:"true"`
-	KwhExportTotal   string `json:"kwh_export_total" vmdata:"true"`
-	KwhImportTotal   string `json:"kwh_import_total" vmdata:"true"`
-	LqiPlc           string `json:"lqi_plc"`
-	LqiRf            string `json:"lqi_rf"`
+	MeterId                string    `json:"meter_id"`
+	Clock                  time.Time `json:"clock"` // assuming ISO8601 format
+	BatteryCapacity        string    `json:"battery_cappacity" vmdata:"true"`
+	Frequency              string    `json:"frequency" vmdata:"true"`
+	VoltageL1              string    `json:"voltage_l1" vmdata:"true"`
+	VoltageL2              string    `json:"voltage_l2" vmdata:"true"`
+	VoltageL3              string    `json:"voltage_l3" vmdata:"true"`
+	CurrentL1              string    `json:"current_l1" vmdata:"true"`
+	CurrentL2              string    `json:"current_l2" vmdata:"true"`
+	CurrentL3              string    `json:"current_l3" vmdata:"true"`
+	CurrentN               string    `json:"current_n" vmdata:"true"`
+	WhExportL1             string    `json:"wh_export_l1" vmdata:"true"`
+	WhExportL2             string    `json:"wh_export_l2" vmdata:"true"`
+	WhExportL3             string    `json:"wh_export_l3" vmdata:"true"`
+	WhExportTotal          string    `json:"wh_export_total" vmdata:"true"`
+	WhImportL1             string    `json:"wh_import_l1" vmdata:"true"`
+	WhImportL2             string    `json:"wh_import_l2" vmdata:"true"`
+	WhImportL3             string    `json:"wh_import_l3" vmdata:"true"`
+	WhImportTotal          string    `json:"wh_import_total" vmdata:"true"`
+	ActivePowerExportL1    string    `json:"active_power_export_l1" vmdata:"true"`
+	ActivePowerExportL2    string    `json:"active_power_export_l2" vmdata:"true"`
+	ActivePowerExportL3    string    `json:"active_power_export_l3" vmdata:"true"`
+	ActivePowerExportTotal string    `json:"active_power_export_total" vmdata:"true"`
+	ActivePowerImportL1    string    `json:"active_power_import_l1" vmdata:"true"`
+	ActivePowerImportL2    string    `json:"active_power_import_l2" vmdata:"true"`
+	ActivePowerImportL3    string    `json:"active_power_import_l3" vmdata:"true"`
+	ActivePowerImportTotal string    `json:"active_power_import_total" vmdata:"true"`
+	PowerFactor            string    `json:"power_factor" vmdata:"true"`
+	PowerFactorL1          string    `json:"power_factor_l1" vmdata:"true"`
+	PowerFactorL2          string    `json:"power_factor_l2" vmdata:"true"`
+	PowerFactorL3          string    `json:"power_factor_l3" vmdata:"true"`
+	ReactivePowerExport    string    `json:"reactive_power_export" vmdata:"true"`
+	ReactivePowerExportL1  string    `json:"reactive_power_export_l1" vmdata:"true"`
+	ReactivePowerExportL2  string    `json:"reactive_power_export_l2" vmdata:"true"`
+	ReactivePowerExportL3  string    `json:"reactive_power_export_l3" vmdata:"true"`
+	ReactivePowerImport    string    `json:"reactive_power_import" vmdata:"true"`
+	ReactivePowerImportL1  string    `json:"reactive_power_import_l1" vmdata:"true"`
+	ReactivePowerImportL2  string    `json:"reactive_power_import_l2" vmdata:"true"`
+	ReactivePowerImportL3  string    `json:"reactive_power_import_l3" vmdata:"true"`
+	VaExportL1             string    `json:"va_export_l1" vmdata:"true"`
+	VaExportL2             string    `json:"va_export_l2" vmdata:"true"`
+	VaExportL3             string    `json:"va_export_l3" vmdata:"true"`
+	VaExportTotal          string    `json:"va_export_total" vmdata:"true"`
+	VaImportL1             string    `json:"va_import_l1" vmdata:"true"`
+	VaImportL2             string    `json:"va_import_l2" vmdata:"true"`
+	VaImportL3             string    `json:"va_import_l3" vmdata:"true"`
+	VaImportTotal          string    `json:"va_import_total" vmdata:"true"`
+	VarhBilling            string    `json:"varh_billing" vmdata:"true"`
+	VarhExportL1           string    `json:"varh_export_l1" vmdata:"true"`
+	VarhExportL2           string    `json:"varh_export_l2" vmdata:"true"`
+	VarhExportL3           string    `json:"varh_export_l3" vmdata:"true"`
+	VarhExportTotal        string    `json:"varh_export_total" vmdata:"true"`
+	VarhImportL1           string    `json:"varh_import_l1" vmdata:"true"`
+	VarhImportL2           string    `json:"varh_import_l2" vmdata:"true"`
+	VarhImportL3           string    `json:"varh_import_l3" vmdata:"true"`
+	VarhImportTotal        string    `json:"varh_import_total" vmdata:"true"`
+	TddCurrent             string    `json:"tdd_current" vmdata:"true"`
+	ThdCurrent             string    `json:"thd_current" vmdata:"true"`
+	VoltageAngleL1         string    `json:"voltage_angle_l1" vmdata:"true"`
+	VoltageAngleL2         string    `json:"voltage_angle_l2" vmdata:"true"`
+	VoltageAngleL3         string    `json:"voltage_angle_l3" vmdata:"true"`
+	CurrentAngleL1         string    `json:"current_angle_l1" vmdata:"true"`
+	CurrentAngleL2         string    `json:"current_angle_l2" vmdata:"true"`
+	CurrentAngleL3         string    `json:"current_angle_l3" vmdata:"true"`
 }
 
 type EndOfBilling struct {
-	BatteryCapacity  string `json:"battery_capacity" vmdata:"true"`
-	InsertBy         string `json:"insert_by"`
-	KvaMaxR1         string `json:"kva_max_r1" vmdata:"true"`
-	KvaMaxR2         string `json:"kva_max_r2" vmdata:"true"`
-	KvaMaxR3         string `json:"kva_max_r3" vmdata:"true"`
-	KvaMaxTotal      string `json:"kva_max_total" vmdata:"true"`
-	KvarhAbsR1       string `json:"kvarh_abs_r1" vmdata:"true"`
-	KvarhAbsR2       string `json:"kvarh_abs_r2" vmdata:"true"`
-	KvarhAbsR3       string `json:"kvarh_abs_r3" vmdata:"true"`
-	KvarhAbsTotal    string `json:"kvarh_abs_total" vmdata:"true"`
-	KvarhExportL1    string `json:"kvarh_export_l1" vmdata:"true"`
-	KvarhExportL2    string `json:"kvarh_export_l2" vmdata:"true"`
-	KvarhExportL3    string `json:"kvarh_export_l3" vmdata:"true"`
-	KvarhExportTotal string `json:"kvarh_export_total" vmdata:"true"`
-	KvarhImportL1    string `json:"kvarh_import_l1" vmdata:"true"`
-	KvarhImportL2    string `json:"kvarh_import_l2" vmdata:"true"`
-	KvarhImportL3    string `json:"kvarh_import_l3" vmdata:"true"`
-	KvarhImportTotal string `json:"kvarh_import_total" vmdata:"true"`
-	KwhAbsR1         string `json:"kwh_abs_r1" vmdata:"true"`
-	KwhAbsR2         string `json:"kwh_abs_r2" vmdata:"true"`
-	KwhAbsR3         string `json:"kwh_abs_r3" vmdata:"true"`
-	KwhAbsTotal      string `json:"kwh_abs_total" vmdata:"true"`
-	KwhExportL1      string `json:"kwh_export_l1" vmdata:"true"`
-	KwhExportL2      string `json:"kwh_export_l2" vmdata:"true"`
-	KwhExportL3      string `json:"kwh_export_l3" vmdata:"true"`
-	KwhExportTotal   string `json:"kwh_export_total" vmdata:"true"`
-	KwhImportL1      string `json:"kwh_import_l1" vmdata:"true"`
-	KwhImportL2      string `json:"kwh_import_l2" vmdata:"true"`
-	KwhImportL3      string `json:"kwh_import_l3" vmdata:"true"`
-	KwhImportTotal   string `json:"kwh_import_total" vmdata:"true"`
-	MeterCode        string `json:"meter_code"`
+	MeterId         string    `json:"meter_id"`
+	Clock           time.Time `json:"clock"`
+	BatteryCapacity string    `json:"battery_cappacity" vmdata:"true"`
+	MeterOffTotal   string    `json:"meter_off_total" vmdata:"true"`
+	TamperTotal     string    `json:"tamper_total" vmdata:"true"`
 
-	PowerOffTotal string `json:"power_off_total"`
-	TamperTotal   string `json:"tamper_total"`
-	ReadTime      string `json:"read_date"`
-	ServerTime    string `json:"server_time"`
+	WhExportR1    string `json:"wh_export_r1" vmdata:"true"`
+	WhExportR2    string `json:"wh_export_r2" vmdata:"true"`
+	WhExportR3    string `json:"wh_export_r3" vmdata:"true"`
+	WhExportR4    string `json:"wh_export_r4" vmdata:"true"`
+	WhExportR5    string `json:"wh_export_r5" vmdata:"true"`
+	WhExportTotal string `json:"wh_export_total" vmdata:"true"`
 
-	TimeKvaR1    string `json:"time_kva_r1"`
-	TimeKvaR2    string `json:"time_kva_r2"`
-	TimeKvaR3    string `json:"time_kva_r3"`
-	TimeKvaTotal string `json:"time_kva_total"`
+	WhImportR1    string `json:"wh_import_r1" vmdata:"true"`
+	WhImportR2    string `json:"wh_import_r2" vmdata:"true"`
+	WhImportR3    string `json:"wh_import_r3" vmdata:"true"`
+	WhImportR4    string `json:"wh_import_r4" vmdata:"true"`
+	WhImportR5    string `json:"wh_import_r5" vmdata:"true"`
+	WhImportTotal string `json:"wh_import_total" vmdata:"true"`
+
+	VaMaxR1    string `json:"va_max_r1" vmdata:"true"`
+	VaMaxR2    string `json:"va_max_r2" vmdata:"true"`
+	VaMaxR3    string `json:"va_max_r3" vmdata:"true"`
+	VaMaxR4    string `json:"va_max_r4" vmdata:"true"`
+	VaMaxR5    string `json:"va_max_r5" vmdata:"true"`
+	VaMaxTotal string `json:"va_max_total" vmdata:"true"`
+
+	TimeVaMax   time.Time `json:"time_va_max"`
+	TimeVaMaxR1 time.Time `json:"time_va_max_r1"`
+	TimeVaMaxR2 time.Time `json:"time_va_max_r2"`
+	TimeVaMaxR3 time.Time `json:"time_va_max_r3"`
+	TimeVaMaxR4 time.Time `json:"time_va_max_r4"`
+	TimeVaMaxR5 time.Time `json:"time_va_max_r5"`
+
+	VahExportR1    string `json:"vah_export_r1" vmdata:"true"`
+	VahExportR2    string `json:"vah_export_r2" vmdata:"true"`
+	VahExportR3    string `json:"vah_export_r3" vmdata:"true"`
+	VahExportR4    string `json:"vah_export_r4" vmdata:"true"`
+	VahExportR5    string `json:"vah_export_r5" vmdata:"true"`
+	VahExportTotal string `json:"vah_export_total" vmdata:"true"`
+
+	VahImportR1    string `json:"vah_import_r1" vmdata:"true"`
+	VahImportR2    string `json:"vah_import_r2" vmdata:"true"`
+	VahImportR3    string `json:"vah_import_r3" vmdata:"true"`
+	VahImportR4    string `json:"vah_import_r4" vmdata:"true"`
+	VahImportR5    string `json:"vah_import_r5" vmdata:"true"`
+	VahImportTotal string `json:"vah_import_total" vmdata:"true"`
+
+	VarhExportR1    string `json:"varh_export_r1" vmdata:"true"`
+	VarhExportR2    string `json:"varh_export_r2" vmdata:"true"`
+	VarhExportR3    string `json:"varh_export_r3" vmdata:"true"`
+	VarhExportR4    string `json:"varh_export_r4" vmdata:"true"`
+	VarhExportR5    string `json:"varh_export_r5" vmdata:"true"`
+	VarhExportTotal string `json:"varh_export_total" vmdata:"true"`
+
+	VarhImportR1    string `json:"varh_import_r1" vmdata:"true"`
+	VarhImportR2    string `json:"varh_import_r2" vmdata:"true"`
+	VarhImportR3    string `json:"varh_import_r3" vmdata:"true"`
+	VarhImportR4    string `json:"varh_import_r4" vmdata:"true"`
+	VarhImportR5    string `json:"varh_import_r5" vmdata:"true"`
+	VarhImportTotal string `json:"varh_import_total" vmdata:"true"`
+
+	VarhTotal string `json:"varh_total" vmdata:"true"`
 }
