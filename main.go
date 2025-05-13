@@ -233,7 +233,7 @@ func main() {
 }
 
 func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insertBy, projectID, brandID string) {
-	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().Location())
+	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().UTC().Location())
 
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
@@ -349,7 +349,7 @@ func loadProfileDummyData(template DataLoadProfile, url, meterId, unitId, insert
 }
 
 func loadInstantDummyData(template DataInstant, url, meterId, unitId, insertBy, projectID, brandID string) {
-	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().Location())
+	baseDate := time.Date(2025, 4, 1, 0, 0, 0, 0, time.Now().UTC().Location())
 
 	operation := template.MeterOperationType
 	status := template.ErrorMessage
@@ -466,7 +466,7 @@ func loadEobDummyData(template DataEndOfBilling, url, meterId, unitId, insertBy,
 	status := template.ErrorMessage
 
 	for d := 4; d <= 5; d++ {
-		day := time.Date(2025, time.Month(d), 1, 0, 0, 0, 0, time.Now().Location())
+		day := time.Date(2025, time.Month(d), 1, 0, 0, 0, 0, time.Now().UTC().Location())
 
 		data := []ValidPayload{}
 		trxId := fmt.Sprintf("%s-%d", template.TrxID, day.UnixMilli())
